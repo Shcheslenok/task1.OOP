@@ -26,20 +26,48 @@ public class Operation {
         while (true) {
             System.out.println("---------------------------------------------");
             System.out.println("Select an action...");
-            System.out.println("1)Add ");
-            System.out.println("2)Client");
+            System.out.println("1)Add account");
+            System.out.println("2)Delete account");
+            System.out.println("3)View all money");
+            System.out.println("4)Count positive and negative balances");
+            System.out.println("5)Block an account");
+            System.out.println("6)Unblock an account");
             System.out.println("0)Exit");
             System.out.println("---------------------------------------------");
 
             switch (Operation.inputNumber()){
 
                 case 1: {
+                    Account account = new Account();
+                    System.out.print("Enter owner: ");
+                    account.setOwner(Operation.inputString());
+                    System.out.print("Enter account number: ");
+                    account.setAccountNumber(Operation.inputString());
+                    System.out.print("Enter amount of money: ");
+                    account.setAmountMoney(Operation.inputNumber());
+                    account.setBlocked(false);
+                    Bank.addAccount(account);
                     break;
                 }
                 case 2: {
+                    Bank.deleteAccount();
                     break;
                 }
                 case 3: {
+                    System.out.println("All money: " + Bank.countMoney());
+                    break;
+                }
+                case 4: {
+                    System.out.println("Positive balance: " + Bank.countPositiveBalance());
+                    System.out.println("Negative balance: " + Bank.countNegativeBalance());
+                    break;
+                }
+                case 5: {
+                    Bank.block();
+                    break;
+                }
+                case 6: {
+                    Bank.unblock();
                     break;
                 }
                 case 0: {
