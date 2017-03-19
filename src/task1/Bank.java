@@ -2,8 +2,17 @@ package task1;
 
 import java.util.ArrayList;
 
+/**
+ * Класс иметирует работу банка
+ *
+ * @version 1.0 19 Mar 2017
+ * @author  Petr Shcheslenok
+ */
 public class Bank {
+    /**Список всех считов в банке*/
     private static ArrayList<Account> listAccountsBank = new ArrayList<>();
+    /**Список клиентов банка*/
+    private static ArrayList<Client> listClients = new ArrayList<>();
 
     public static ArrayList<Account> getListAccountsBank() {
         return listAccountsBank;
@@ -14,9 +23,7 @@ public class Bank {
         return listAccountsBank;
     }
 
-    public static ArrayList<Account> deleteAccount(){
-        System.out.println("Enter account number for delete");
-        String numberAccount = Operation.inputString();
+    public static ArrayList<Account> deleteAccount(String numberAccount){
         for (Account account: listAccountsBank) {
             if (account.getAccountNumber().equals(numberAccount)) {
                 listAccountsBank.remove(account);
@@ -85,5 +92,14 @@ public class Bank {
         }
 
         return listAccountsBank;
+    }
+
+    public static ArrayList<Client> getListClients() {
+        return listClients;
+    }
+
+    public static ArrayList<Client> addClient(Client client) {
+        listClients.add(client);
+        return listClients;
     }
 }
