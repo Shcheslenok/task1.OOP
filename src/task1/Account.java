@@ -38,4 +38,13 @@ public class Account {
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
+
+    public void printDataAccount(){
+        System.out.println("---------------------------------------------");
+        System.out.println("Owner: " + getOwner());
+        System.out.println("Number of account: " + getAccountNumber());
+        System.out.println("Amount of account: " + getAmountMoney());
+        System.out.println("Blocked: " + isBlocked());
+        System.out.println("---------------------------------------------");
+    }
 }

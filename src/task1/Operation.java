@@ -32,6 +32,7 @@ public class Operation {
             System.out.println("4)Count positive and negative balances");
             System.out.println("5)Block an account");
             System.out.println("6)Unblock an account");
+            System.out.println("7)View all accounts");
             System.out.println("0)Exit");
             System.out.println("---------------------------------------------");
 
@@ -68,6 +69,12 @@ public class Operation {
                 }
                 case 6: {
                     Bank.unblock();
+                    break;
+                }
+                case 7: {
+                    for (Account account: Bank.getListAccountsBank()) {
+                        account.printDataAccount();
+                    }
                     break;
                 }
                 case 0: {

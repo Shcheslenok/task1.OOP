@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class Bank {
     private static ArrayList<Account> listAccountsBank = new ArrayList<>();
 
+    public static ArrayList<Account> getListAccountsBank() {
+        return listAccountsBank;
+    }
+
     public static ArrayList<Account> addAccount(Account account) {
         listAccountsBank.add(account);
         return listAccountsBank;
