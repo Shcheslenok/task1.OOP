@@ -1,4 +1,6 @@
-package task1;
+package task1.Model;
+
+import task1.Services.Operation;
 
 import java.util.ArrayList;
 

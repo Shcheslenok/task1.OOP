@@ -1,4 +1,8 @@
-package task1;
+package task1.Services;
+
+import task1.Model.Account;
+import task1.Model.Bank;
+import task1.Model.Client;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -146,13 +150,13 @@ public class Operation {
                         switch (Operation.inputNumber()) {
                             case 1: {
                                 for (Account account : Bank.getListAccountsBank()) {
-                                    account.printDataAccount();
+                                    System.out.println(account);
                                 }
                                 break;
                             }
                             case 2: {
                                 for (Client client: Bank.getListClients()) {
-                                    client.printDataClient();
+                                    System.out.println(client);
                                 }
                                 break;
                             }
@@ -170,7 +174,7 @@ public class Operation {
                     Collections.sort(Bank.getListAccountsBank(), new SortedByAmountMoney());
 
                     for (Account account: Bank.getListAccountsBank()) {
-                        account.printDataAccount();
+                        System.out.println(account);
                     }
                     break;
                 }
@@ -178,7 +182,7 @@ public class Operation {
                     Collections.sort(Bank.getListAccountsBank(), new SortedByClient());
 
                     for (Account account: Bank.getListAccountsBank()) {
-                        account.printDataAccount();
+                        System.out.println(account);
                     }
                     break;
                 }

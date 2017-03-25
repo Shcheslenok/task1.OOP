@@ -1,4 +1,4 @@
-package task1;
+package task1.Model;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class Client {
     /**Список счетов клиента*/
     private ArrayList<String> listAccountsClient = new ArrayList<>();
 
-    Client(String name, String account) {
+    public Client(String name, String account) {
         this.name = name;
         listAccountsClient.add(account);
     }
@@ -41,12 +41,12 @@ public class Client {
         return listAccountsClient;
     }
 
-    public void printDataClient() {
-        System.out.println("---------------------------------------------");
-        System.out.println("Owner: " + getName());
+    public String toString() {
+        String data = "---------------------------------------------" + "\n" + "Owner: " + getName();
         for (String str: listAccountsClient) {
-            System.out.println("\t" + str);
+            data += "\t" + str + "\n";
         }
-        System.out.println("---------------------------------------------");
+        data += "---------------------------------------------";
+        return data;
     }
 }

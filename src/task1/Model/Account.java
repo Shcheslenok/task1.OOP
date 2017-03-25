@@ -1,4 +1,4 @@
-package task1;
+package task1.Model;
 
 /**
  * Стартовый класс
@@ -16,7 +16,7 @@ public class Account {
     /**Блокировка счета(true - заблокирован)*/
     private boolean blocked;
 
-    Account() {
+    public Account() {
         owner = null;
         accountNumber = null;
         amountMoney = 0;
@@ -55,13 +55,13 @@ public class Account {
         this.blocked = blocked;
     }
 
-    public void printDataAccount(){
-        System.out.println("---------------------------------------------");
-        System.out.println("Owner: " + getOwner());
-        System.out.println("Number of account: " + getAccountNumber());
-        System.out.println("Amount of account: " + getAmountMoney());
-        System.out.println("Blocked: " + isBlocked());
-        System.out.println("---------------------------------------------");
+    public String toString(){
+        return "---------------------------------------------" + "\n" +
+                "Owner: " + getOwner() + "\n" +
+                "Number of account: " + getAccountNumber() + "\n" +
+                "Amount of account: " + getAmountMoney() + "\n" +
+                "Blocked: " + isBlocked() + "\n" +
+                "---------------------------------------------";
     }
 
     /*public int replenishAccount() {
