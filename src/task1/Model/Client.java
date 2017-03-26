@@ -3,16 +3,19 @@ package task1.Model;
 import java.util.ArrayList;
 
 /**
- * Стартовый класс
- *
+ * Class contains data about client
  * @version 1.0 19 Mar 2017
  * @author  Petr Shcheslenok
  */
 public class Client {
-    /**Имя клиента*/
+    /**The name of client*/
     private String name;
-    /**Список счетов клиента*/
+    /**The list of client account*/
     private ArrayList<String> listAccountsClient = new ArrayList<>();
+
+    public void setListAccountsClient(ArrayList<String> listAccountsClient) {
+        this.listAccountsClient = listAccountsClient;
+    }
 
     public Client(String name, String account) {
         this.name = name;
@@ -28,16 +31,6 @@ public class Client {
     }
 
     public ArrayList<String> getListAccountsClient() {
-        return listAccountsClient;
-    }
-
-    public ArrayList<String> addAccount(Account account) {
-        listAccountsClient.add(account.getAccountNumber());
-        return listAccountsClient;
-    }
-
-    public ArrayList<String> deleteAccount(String numberAccount) {
-        listAccountsClient.remove(numberAccount);
         return listAccountsClient;
     }
 

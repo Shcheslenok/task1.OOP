@@ -1,19 +1,18 @@
 package task1.Model;
 
 /**
- * Стартовый класс
- *
+ * Class contains data about account
  * @version 1.0 19 Mar 2017
  * @author  Petr Shcheslenok
  */
 public class Account {
-    /**Имя владельца счета*/
+    /**The name of the account holder*/
     private String owner;
-    /**Номер счета*/
+    /**The number of account*/
     private String accountNumber;
-    /**Колличество денег на счете*/
+    /**The amount of money*/
     private int amountMoney;
-    /**Блокировка счета(true - заблокирован)*/
+    /**Account blocking(true - blocked)*/
     private boolean blocked;
 
     public Account() {
@@ -21,6 +20,13 @@ public class Account {
         accountNumber = null;
         amountMoney = 0;
         blocked = false;
+    }
+
+    public Account(String owner, String accountNumber, int amountMoney, boolean blocked){
+        this.owner = owner;
+        this.accountNumber = accountNumber;
+        this.amountMoney = amountMoney;
+        this.blocked = blocked;
     }
 
     public String getOwner() {
@@ -63,12 +69,4 @@ public class Account {
                 "Blocked: " + isBlocked() + "\n" +
                 "---------------------------------------------";
     }
-
-    /*public int replenishAccount() {
-
-    }
-
-    public int pullOff() {
-
-    }*/
 }

@@ -3,35 +3,27 @@ package task1.Services;
 import task1.Model.Account;
 import task1.Model.Bank;
 import task1.Model.Client;
+import task1.Sorting.*;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
- * Стартовый класс
+ * Class contain input methods
+ * and to create menu
  *
  * @version 1.0 19 Mar 2017
  * @author  Petr Shcheslenok
  */
 public class Operation {
-    /**Переменная для реализаци ввода с клавиатуры*/
-    public static Scanner input = new Scanner(System.in);
 
     public static int inputNumber(){
-
-        int number;
-        //input = new Scanner(System.in);
-        number = input.nextInt();
-        return number;
+        Scanner input = new Scanner(System.in);
+        return input.nextInt();
     }
 
     public static String inputString(){
-
-        String str;
-        //input = new Scanner(System.in);
-        str = input.next();
-        return str;
+        Scanner input = new Scanner(System.in);
+        return input.next();
     }
 
     public static void menu() {
@@ -75,9 +67,9 @@ public class Operation {
                                 account.setAmountMoney(Operation.inputNumber());
                                 account.setBlocked(false);
 
-                                Bank.addAccount(account);
+                                ServiceBank.addAccount(account);
                                 client = new Client(account.getOwner(), account.getAccountNumber());
-                                Bank.addClient(client);
+                                ServiceBank.addClient(client);
                                 break menu;
                             }
                             case 2: {
@@ -89,10 +81,10 @@ public class Operation {
                                 System.out.print("Enter amount of money: ");
                                 account.setAmountMoney(Operation.inputNumber());
                                 account.setBlocked(false);
-                                Bank.addAccount(account);
-                                for (Client client: Bank.getListClients()) {
+                                ServiceBank.addAccount(account);
+                                for (Client client: ServiceBank.getListClients()) {
                                     if (client.getName().equals(account.getOwner())){
-                                        client.addAccount(account);
+                                        ServiceClient.addAccount(client, account);
                                         break menu;
                                     }
                                 }
@@ -111,31 +103,31 @@ public class Operation {
 
                     System.out.print("Enter account number for delete: ");
                     String numberAccount = Operation.inputString();
-                    Bank.deleteAccount(numberAccount);
-                    for (Client client: Bank.getListClients()){
+                    ServiceBank.deleteAccount(numberAccount);
+                    for (Client client: ServiceBank.getListClients()){
                         for (String str: client.getListAccountsClient()) {
                             if (str.equals(numberAccount)){
-                                client.deleteAccount(numberAccount);
+                                ServiceClient.deleteAccount(client, numberAccount);
                                 break menu;
                             }
                         }
                     }
                 }
                 case 3: {
-                    System.out.println("All money: " + Bank.countMoney());
+                    System.out.println("All money: " + ServiceBank.countMoney());
                     break;
                 }
                 case 4: {
-                    System.out.println("Positive balance: " + Bank.countPositiveBalance());
-                    System.out.println("Negative balance: " + Bank.countNegativeBalance());
+                    System.out.println("Positive balance: " + ServiceBank.countPositiveBalance());
+                    System.out.println("Negative balance: " + ServiceBank.countNegativeBalance());
                     break;
                 }
                 case 5: {
-                    Bank.block();
+                    ServiceBank.block();
                     break;
                 }
                 case 6: {
-                    Bank.unblock();
+                    ServiceBank.unblock();
                     break;
                 }
                 case 7: {
@@ -149,7 +141,7 @@ public class Operation {
 
                         switch (Operation.inputNumber()) {
                             case 1: {
-                                for (Account account : Bank.getListAccountsBank()) {
+                                for (Account account : ServiceBank.getListAccountsBank()) {
                                     System.out.println(account);
                                 }
                                 break;
@@ -171,7 +163,7 @@ public class Operation {
                     }
                 }
                 case 8: {
-                    Collections.sort(Bank.getListAccountsBank(), new SortedByAmountMoney());
+                    Bank.getListAccountsBank().sort(new SortedByAmountMoney());
 
                     for (Account account: Bank.getListAccountsBank()) {
                         System.out.println(account);
@@ -179,7 +171,7 @@ public class Operation {
                     break;
                 }
                 case 9: {
-                    Collections.sort(Bank.getListAccountsBank(), new SortedByClient());
+                    Bank.getListAccountsBank().sort(new SortedByClient());
 
                     for (Account account: Bank.getListAccountsBank()) {
                         System.out.println(account);
@@ -189,6 +181,7 @@ public class Operation {
                 case 0: {
                     System.out.println("---------------------------------------------");
                     System.out.println("Work completed");
+                    ServicesFile.writeFile();
                     System.out.println("---------------------------------------------");
                     System.exit(0);
                 }
@@ -196,42 +189,6 @@ public class Operation {
                     System.out.println("---------------------------------------------");
                     System.out.println("Impossible choice or format. Repeat please ...");
                 }
-            }
-        }
-    }
-
-    /**
-     * Вспомогательный класс для использывания интерфейса
-     * для реализации сортировки счетов по имени клиента
-     */
-    private static class SortedByClient  implements Comparator<Account> {
-        @Override
-        public int compare(Account o1, Account o2) {
-            String owner1 = o1.getOwner();
-            String owner2 = o2.getOwner();
-
-            return owner1.compareTo(owner2);
-        }
-    }
-
-    /**
-     * Вспомогательный класс для использывания интерфейса
-     * для реализации сортировки счетов по колличеству денег на счете
-     */
-    private static class SortedByAmountMoney implements Comparator<Account> {
-        @Override
-        public int compare(Account o1, Account o2) {
-            int money1 = o1.getAmountMoney();
-            int money2 = o2.getAmountMoney();
-
-            if (money1 > money2){
-                return 1;
-            }
-            else if (money1 < money2){
-                return -1;
-            }
-            else {
-                return 0;
             }
         }
     }

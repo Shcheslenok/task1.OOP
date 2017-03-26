@@ -1,9 +1,10 @@
 package task1;
 
 import task1.Services.Operation;
+import task1.Services.ServiceAccount;
 
 /**
- * Стартовый класс
+ * Starting class
  *
  * @version 1.0 19 Mar 2017
  * @author  Petr Shcheslenok
@@ -11,7 +12,7 @@ import task1.Services.Operation;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        ServiceAccount.initializationAccounts();
         Operation.menu();
     }
 }
