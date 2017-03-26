@@ -30,7 +30,6 @@ public class ServiceBank extends Bank {
         for (Account account : getListAccountsBank()) {
             sumAll += account.getAmountMoney();
         }
-
         return sumAll;
     }
 
@@ -41,7 +40,6 @@ public class ServiceBank extends Bank {
                 sumPositive += account.getAmountMoney();
             }
         }
-
         return sumPositive;
     }
 
@@ -52,7 +50,6 @@ public class ServiceBank extends Bank {
                 sumNegative += account.getAmountMoney();
             }
         }
-
         return sumNegative;
     }
 
@@ -67,7 +64,6 @@ public class ServiceBank extends Bank {
                 break;
             }
         }
-
         return getListAccountsBank();
     }
 
@@ -82,7 +78,6 @@ public class ServiceBank extends Bank {
                 break;
             }
         }
-
         return getListAccountsBank();
     }
 
@@ -91,4 +86,42 @@ public class ServiceBank extends Bank {
         return getListClients();
     }
 
+    public static void putMoney(){
+        String numberAccount;
+        System.out.print("Enter number of account: ");
+        numberAccount = Operation.inputString();
+        for (Account account: getListAccountsBank()) {
+            if (account.getAccountNumber().equals(numberAccount)){
+                if (account.isBlocked()){
+                    System.out.println("Account is blocked");
+                    break;
+                }
+                else {
+                    System.out.print("Enter the amount of money:");
+                    account.setAmountMoney(account.getAmountMoney() - Operation.inputNumber());
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public static void pullOffMoney(){
+        String numberAccount;
+        System.out.print("Enter number of account: ");
+        numberAccount = Operation.inputString();
+        for (Account account: getListAccountsBank()) {
+            if (account.getAccountNumber().equals(numberAccount)){
+                if (account.isBlocked()){
+                    System.out.println("Account is blocked");
+                    break;
+                }
+                else {
+                    System.out.print("Enter the amount of money:");
+                    account.setAmountMoney(account.getAmountMoney() - Operation.inputNumber());
+                    break;
+                }
+            }
+        }
+    }
 }

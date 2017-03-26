@@ -40,6 +40,7 @@ public class Operation {
             System.out.println("7)View data");
             System.out.println("8)Sort by amount of money");
             System.out.println("9)Sort by client");
+            System.out.println("10)Account transactions");
             System.out.println("0)Exit");
             System.out.println("---------------------------------------------");
 
@@ -177,6 +178,33 @@ public class Operation {
                         System.out.println(account);
                     }
                     break;
+                }
+                case 10: {
+                    while(true) {
+                        System.out.println("---------------------------------------------");
+                        System.out.println("1)Put money");
+                        System.out.println("2)Pull off money");
+                        System.out.println("0)Previous");
+                        System.out.println("---------------------------------------------");
+
+                        switch (Operation.inputNumber()){
+                            case 1: {
+                                ServiceBank.putMoney();
+                                break;
+                            }
+                            case 2: {
+                                ServiceBank.pullOffMoney();
+                                break;
+                            }
+                            case 0: {
+                                break menu;
+                            }
+                            default: {
+                                System.out.println("---------------------------------------------");
+                                System.out.println("Impossible choice or format. Repeat please ...");
+                            }
+                        }
+                    }
                 }
                 case 0: {
                     System.out.println("---------------------------------------------");
