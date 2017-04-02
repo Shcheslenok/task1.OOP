@@ -1,10 +1,11 @@
-package task1.Services;
+package task1.services;
 
-import task1.Model.Account;
-import task1.Model.Bank;
-import task1.Model.Client;
-import task1.Sorting.*;
+import task1.model.Account;
+import task1.model.Bank;
+import task1.model.Client;
+import task1.sorting.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -26,7 +27,7 @@ public class Operation {
         return input.next();
     }
 
-    public static void menu() {
+    public static void menu(Bank bank) {
 
         while (true) {
             System.out.println("---------------------------------------------");
@@ -39,7 +40,7 @@ public class Operation {
             System.out.println("6)Unblock an account");
             System.out.println("7)View data");
             System.out.println("8)Sort by amount of money");
-            System.out.println("9)Sort by client");
+            System.out.println("9)Sort by number of account");
             System.out.println("10)Account transactions");
             System.out.println("0)Exit");
             System.out.println("---------------------------------------------");
@@ -59,32 +60,35 @@ public class Operation {
                             case 1: {
                                 Client client;
                                 Account account = new Account();
+                                String nameClient;
 
                                 System.out.print("Enter client name:");
-                                account.setOwner(Operation.inputString());
+                                nameClient = Operation.inputString();
                                 System.out.print("Enter account number: ");
                                 account.setAccountNumber(Operation.inputString());
                                 System.out.print("Enter amount of money: ");
                                 account.setAmountMoney(Operation.inputNumber());
                                 account.setBlocked(false);
 
-                                ServiceBank.addAccount(account);
-                                client = new Client(account.getOwner(), account.getAccountNumber());
-                                ServiceBank.addClient(client);
+                                ServiceBank.addAccount(bank, account);
+                                client = new Client(nameClient, account);
+                                ServiceBank.addClient(bank, client);
                                 break menu;
                             }
                             case 2: {
                                 Account account = new Account();
+                                String nameClient;
+
                                 System.out.print("Enter owner: ");
-                                account.setOwner(Operation.inputString());
+                                nameClient = Operation.inputString();
                                 System.out.print("Enter account number: ");
                                 account.setAccountNumber(Operation.inputString());
                                 System.out.print("Enter amount of money: ");
                                 account.setAmountMoney(Operation.inputNumber());
                                 account.setBlocked(false);
-                                ServiceBank.addAccount(account);
-                                for (Client client: ServiceBank.getListClients()) {
-                                    if (client.getName().equals(account.getOwner())){
+                                ServiceBank.addAccount(bank, account);
+                                for (Client client: bank.getListClients()) {
+                                    if (client.getName().equals(nameClient)){
                                         ServiceClient.addAccount(client, account);
                                         break menu;
                                     }
@@ -104,31 +108,31 @@ public class Operation {
 
                     System.out.print("Enter account number for delete: ");
                     String numberAccount = Operation.inputString();
-                    ServiceBank.deleteAccount(numberAccount);
-                    for (Client client: ServiceBank.getListClients()){
-                        for (String str: client.getListAccountsClient()) {
-                            if (str.equals(numberAccount)){
-                                ServiceClient.deleteAccount(client, numberAccount);
+                    ServiceBank.deleteAccount(bank, numberAccount);
+                    for (Client client: bank.getListClients()){
+                        for (Account account: client.getListAccountsClient()) {
+                            if (account.getAccountNumber().equals(numberAccount)){
+                                ServiceClient.deleteAccount(client, account);
                                 break menu;
                             }
                         }
                     }
                 }
                 case 3: {
-                    System.out.println("All money: " + ServiceBank.countMoney());
+                    System.out.println("All money: " + ServiceBank.countMoney(bank));
                     break;
                 }
                 case 4: {
-                    System.out.println("Positive balance: " + ServiceBank.countPositiveBalance());
-                    System.out.println("Negative balance: " + ServiceBank.countNegativeBalance());
+                    System.out.println("Positive balance: " + ServiceBank.countPositiveBalance(bank));
+                    System.out.println("Negative balance: " + ServiceBank.countNegativeBalance(bank));
                     break;
                 }
                 case 5: {
-                    ServiceBank.block();
+                    ServiceBank.block(bank);
                     break;
                 }
                 case 6: {
-                    ServiceBank.unblock();
+                    ServiceBank.unblock(bank);
                     break;
                 }
                 case 7: {
@@ -142,13 +146,13 @@ public class Operation {
 
                         switch (Operation.inputNumber()) {
                             case 1: {
-                                for (Account account : ServiceBank.getListAccountsBank()) {
+                                for (Account account : bank.getListAccountsBank()) {
                                     System.out.println(account);
                                 }
                                 break;
                             }
                             case 2: {
-                                for (Client client: Bank.getListClients()) {
+                                for (Client client: bank.getListClients()) {
                                     System.out.println(client);
                                 }
                                 break;
@@ -164,17 +168,17 @@ public class Operation {
                     }
                 }
                 case 8: {
-                    Bank.getListAccountsBank().sort(new SortedByAmountMoney());
+                    bank.getListAccountsBank().sort(new SortedByAmountMoney());
 
-                    for (Account account: Bank.getListAccountsBank()) {
+                    for (Account account: bank.getListAccountsBank()) {
                         System.out.println(account);
                     }
                     break;
                 }
                 case 9: {
-                    Bank.getListAccountsBank().sort(new SortedByClient());
+                    bank.getListAccountsBank().sort(new SortedByNumberAccount());
 
-                    for (Account account: Bank.getListAccountsBank()) {
+                    for (Account account: bank.getListAccountsBank()) {
                         System.out.println(account);
                     }
                     break;
@@ -189,11 +193,11 @@ public class Operation {
 
                         switch (Operation.inputNumber()){
                             case 1: {
-                                ServiceBank.putMoney();
+                                ServiceBank.changeAmountMoney(bank, 1);
                                 break;
                             }
                             case 2: {
-                                ServiceBank.pullOffMoney();
+                                ServiceBank.changeAmountMoney(bank, -1);
                                 break;
                             }
                             case 0: {
@@ -209,7 +213,8 @@ public class Operation {
                 case 0: {
                     System.out.println("---------------------------------------------");
                     System.out.println("Work completed");
-                    ServicesFile.writeFile();
+                    File file = new File("src/file/accounts.txt");
+                    ServicesFile.writeFile(bank, file);
                     System.out.println("---------------------------------------------");
                     System.exit(0);
                 }

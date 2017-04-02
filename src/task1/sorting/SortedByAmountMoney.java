@@ -1,6 +1,6 @@
-package task1.Sorting;
+package task1.sorting;
 
-import task1.Model.Account;
+import task1.model.Account;
 
 import java.util.Comparator;
 

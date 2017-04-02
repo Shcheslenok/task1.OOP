@@ -1,4 +1,4 @@
-package task1.Model;
+package task1.model;
 
 /**
  * Class contains data about account
@@ -6,8 +6,6 @@ package task1.Model;
  * @author  Petr Shcheslenok
  */
 public class Account {
-    /**The name of the account holder*/
-    private String owner;
     /**The number of account*/
     private String accountNumber;
     /**The amount of money*/
@@ -16,25 +14,15 @@ public class Account {
     private boolean blocked;
 
     public Account() {
-        owner = null;
         accountNumber = null;
         amountMoney = 0;
         blocked = false;
     }
 
-    public Account(String owner, String accountNumber, int amountMoney, boolean blocked){
-        this.owner = owner;
+    public Account(String accountNumber, int amountMoney, boolean blocked){
         this.accountNumber = accountNumber;
         this.amountMoney = amountMoney;
         this.blocked = blocked;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public String getAccountNumber() {
@@ -63,7 +51,6 @@ public class Account {
 
     public String toString(){
         return "---------------------------------------------" + "\n" +
-                "Owner: " + getOwner() + "\n" +
                 "Number of account: " + getAccountNumber() + "\n" +
                 "Amount of account: " + getAmountMoney() + "\n" +
                 "Blocked: " + isBlocked() + "\n" +

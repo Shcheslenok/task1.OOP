@@ -1,7 +1,8 @@
 package task1;
 
-import task1.Services.Operation;
-import task1.Services.ServiceAccount;
+import task1.model.Bank;
+import task1.services.Operation;
+import task1.services.ServiceAccount;
 
 /**
  * Starting class
@@ -12,7 +13,8 @@ import task1.Services.ServiceAccount;
 public class Main {
 
     public static void main(String[] args) {
-        ServiceAccount.initializationAccounts();
-        Operation.menu();
+        Bank bank;
+        bank = ServiceAccount.initializationAccounts();
+        Operation.menu(bank);
     }
 }
