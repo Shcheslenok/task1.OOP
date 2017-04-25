@@ -1,7 +1,7 @@
-package task1.services;
+package model.services;
 
-import task1.model.Account;
-import task1.model.Client;
+import model.beans.Account;
+import model.beans.Client;
 
 /**
  * Class to work with data of clint

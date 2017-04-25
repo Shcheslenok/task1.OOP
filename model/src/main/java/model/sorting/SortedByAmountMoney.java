@@ -1,6 +1,6 @@
-package task1.sorting;
+package model.sorting;
 
-import task1.model.Account;
+import model.beans.Account;
 
 import java.util.Comparator;
 

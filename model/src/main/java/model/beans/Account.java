@@ -1,4 +1,4 @@
-package task1.model;
+package model.beans;
 
 /**
  * Class contains data about account

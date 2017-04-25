@@ -1,9 +1,9 @@
-package task1.services;
+package model.services;
 
-import task1.model.Account;
-import task1.model.Bank;
-import task1.model.Client;
-import task1.sorting.*;
+import model.beans.Account;
+import model.beans.Bank;
+import model.beans.Client;
+import model.sorting.*;
 
 import java.io.File;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package task1.model;
+package model.beans;
 
 import java.util.ArrayList;
 

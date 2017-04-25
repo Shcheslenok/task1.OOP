@@ -1,8 +1,8 @@
-package task1.services;
+package model.services;
 
-import task1.model.Account;
-import task1.model.Bank;
-import task1.model.Client;
+import model.beans.Bank;
+import model.beans.Client;
+import model.beans.Account;
 
 import java.util.ArrayList;
 

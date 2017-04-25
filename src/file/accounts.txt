@@ -1,6 +1,0 @@
-Bill 456 -8000 false
-Peter 987 -3000 false
-Alex 321 800 true
-Ivan 789 4000 false
-Kirill 054 8000 false
-Tina 876 -500 true
